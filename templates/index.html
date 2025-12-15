@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Payment Gateway</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.4/dist/web3.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🦊 MetaMask Payment Gateway</h1>
+        
+        <div class="payment-form">
+            <div class="form-group">
+                <label for="amount">Amount (ETH):</label>
+                <input type="number" id="amount" step="0.001" min="0.001" value="0.01" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" id="description" placeholder="Payment for services" class="form-control">
+            </div>
+            
+            <button onclick="connectMetaMask()" class="btn btn-primary" id="connectBtn">
+                🔌 Connect MetaMask
+            </button>
+            
+            <button onclick="createPayment()" class="btn btn-success" id="payBtn" disabled>
+                💳 Create Payment
+            </button>
+            
+            <div id="paymentInfo" class="payment-info" style="display: none;">
+                <h3>Payment Details</h3>
+                <p><strong>Payment ID:</strong> <span id="paymentId"></span></p>
+                <p><strong>Amount:</strong> <span id="paymentAmount"></span> ETH</p>
+                <p><strong>Receiver:</strong> <span id="receiverAddress"></span></p>
+                <p><strong>Status:</strong> <span id="paymentStatus" class="status-pending">Pending</span></p>
+                
+                <button onclick="sendPayment()" class="btn btn-pay" id="sendBtn">
+                    🚀 Send with MetaMask
+                </button>
+                
+                <div id="txInfo" class="tx-info" style="display: none;">
+                    <p><strong>Transaction Hash:</strong> <span id="txHash"></span></p>
+                    <button onclick="verifyPayment()" class="btn btn-verify">
+                    ✅ Verify Payment
+                    </button>
+                </div>
+            </div>
+            
+            <div id="statusMessage" class="alert"></div>
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 How to pay:</h3>
+            <ol>
+                <li>Connect your MetaMask wallet</li>
+                <li>Enter amount and description</li>
+                <li>Create payment request</li>
+                <li>Confirm transaction in MetaMask</li>
+                <li>Verify payment</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/web3.js') }}"></script>
+</body>
+</html>
